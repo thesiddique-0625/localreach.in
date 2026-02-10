@@ -1,0 +1,125 @@
+/* Preloader Container */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85); /* 85% opacity white background */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* 3D Rotating Letters */
+#box {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#box div {
+    display: inline-block;
+    margin: 5px;
+    font-size: 35px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    animation: 2s obrot linear infinite;
+}
+
+/* Color Classes */
+.local-letter {
+    color: #000000; /* Black for "Local" */
+}
+
+.reach-letter {
+    color: #4CAF50; /* Green for "Reach" */
+}
+
+/* 3D Rotation Animation */
+@keyframes obrot {
+    0% {
+        transform: rotateX(0);
+    }
+    12.5% {
+        transform: rotateX(90deg);
+    }
+    25% {
+        transform: rotateX(180deg);
+    }
+    37.5% {
+        transform: rotateX(270deg);
+    }
+    50% {
+        transform: rotateX(360deg);
+    }
+    100% {
+        transform: rotateX(360deg);
+    }
+}
+
+/* Staggered Animation Delays */
+#box div:nth-child(1) {
+    animation-delay: 0s;
+}
+#box div:nth-child(2) {
+    animation-delay: 0.1s;
+}
+#box div:nth-child(3) {
+    animation-delay: 0.2s;
+}
+#box div:nth-child(4) {
+    animation-delay: 0.3s;
+}
+#box div:nth-child(5) {
+    animation-delay: 0.4s;
+}
+#box div:nth-child(6) {
+    animation-delay: 0.5s;
+}
+#box div:nth-child(7) {
+    animation-delay: 0.6s;
+}
+#box div:nth-child(8) {
+    animation-delay: 0.7s;
+}
+#box div:nth-child(9) {
+    animation-delay: 0.8s;
+}
+#box div:nth-child(10) {
+    animation-delay: 0.9s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #box div {
+        font-size: 28px;
+        margin: 4px;
+    }
+    
+    #box {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    #box div {
+        font-size: 22px;
+        margin: 3px;
+    }
+    
+    #box {
+        width: 300px;
+        height: 300px;
+    }
+}

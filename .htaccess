@@ -1,0 +1,89 @@
+# ============================================
+# LocalReach.in - Website Protection
+# ============================================
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# --------------------------------------------------------------------
+# 1. REMOVE .HTML EXTENSION FROM URLS
+# --------------------------------------------------------------------
+
+# Remove .html extension and redirect if accessed with extension
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# Internally add .html extension for file access
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# --------------------------------------------------------------------
+# 2. REMOVE TRAILING SLASHES
+# --------------------------------------------------------------------
+
+# Remove trailing slashes (except for directories)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# --------------------------------------------------------------------
+# 3. PREVENT HOTLINKING (IMAGE THEFT)
+# --------------------------------------------------------------------
+
+# Block image hotlinking from external sites
+# Allow only localreach.in, localhost, and empty referrers (direct access)
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?localreach\.in [NC]
+RewriteCond %{HTTP_REFERER} !^https?://localhost [NC]
+RewriteRule \.(jpg|jpeg|png|gif|webp|avif|svg|ico|bmp|tiff)$ - [NC,F,L]
+
+# --------------------------------------------------------------------
+# 4. PREVENT DOWNLOADING WITH TOOLS LIKE WGET
+# --------------------------------------------------------------------
+
+# Block common download tools and bots
+RewriteCond %{HTTP_USER_AGENT} (wget|curl|libcurl|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner|scrapy|sucker) [NC]
+RewriteRule .* - [F,L]
+
+# Block blank user agents (common with automated tools)
+RewriteCond %{HTTP_USER_AGENT} ^-?$
+RewriteRule ^ - [F,L]
+
+# Block specific download patterns in query strings
+RewriteCond %{QUERY_STRING} (download|save|get|dl|zip|tar|gz) [NC]
+RewriteRule \.(html|css|js|jpg|jpeg|png|gif|pdf|doc|docx)$ - [NC,F,L]
+
+# --------------------------------------------------------------------
+# 5. BASIC SECURITY
+# --------------------------------------------------------------------
+
+# Protect the .htaccess file itself
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Prevent directory browsing
+Options -Indexes
+
+# Block access to sensitive files
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|bak|backup|config)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# --------------------------------------------------------------------
+# 6. FORCE HTTPS (Uncomment when SSL is installed)
+# --------------------------------------------------------------------
+
+# RewriteCond %{HTTPS} off
+# RewriteCond %{HTTP_HOST} ^(www\.)?localreach\.in$ [NC]
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# --------------------------------------------------------------------
+# 7. To Prevent download from archieve.org
+#---------------------------------------------------------------------
+
+# Block Internet Archive's Wayback Machine
+RewriteCond %{HTTP_USER_AGENT} (ia_archiver|archive.org_bot) [NC]
+RewriteRule .* - [F,L]
