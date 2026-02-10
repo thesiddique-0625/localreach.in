@@ -179,3 +179,16 @@
                 // Also add it to window load for good measure
                 window.addEventListener('load', initScrollToTop);
             });
+            
+            // Basic hotlink protection
+            if (document.referrer && 
+                !document.referrer.includes('localreach.in') && 
+                !document.referrer.includes('localhost') &&
+                document.referrer !== '') {
+                
+                // Optional: Redirect hotlinkers to your homepage
+                // window.location.href = 'https://localreach.in';
+                
+                // Or show a warning
+                console.log('Hotlinking detected from:', document.referrer);
+            }
