@@ -1,4 +1,4 @@
-// Mobile Menu Toggle
+// ========== MOBILE MENU TOGGLE ==========
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const navMenu = document.getElementById('navMenu');
             
@@ -7,12 +7,10 @@
                 mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
                     ? '<i class="fas fa-times"></i>' 
                     : '<i class="fas fa-bars"></i>';
-                    
-                // Toggle body scroll when menu is open
                 document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
             });
 
-            // Close mobile menu when clicking a link
+            // Close menu when clicking a link
             document.querySelectorAll('#navMenu a').forEach(link => {
                 link.addEventListener('click', () => {
                     navMenu.classList.remove('active');
@@ -32,39 +30,121 @@
                 }
             });
 
-            // Set active navigation based on current page
-            document.addEventListener('DOMContentLoaded', function() {
-                const currentPage = window.location.pathname.split('/').pop();
+            // ========== HEADER SCROLL EFFECT ==========
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                const header = document.querySelector('header');
+                
+                if (currentScroll > 100) {
+                    if (currentScroll > lastScroll && !navMenu.classList.contains('active')) {
+                        header.style.transform = 'translateY(-100%)';
+                    } else {
+                        header.style.transform = 'translateY(0)';
+                        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                    }
+                } else {
+                    header.style.transform = 'translateY(0)';
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                }
+                lastScroll = currentScroll;
+            });
+
+            // ========== RESIZE LISTENER ==========
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // ========== SCROLL-TO-TOP BUTTON ==========
+            function initScrollToTop() {
+                const scrollBtn = document.getElementById('scrollToTopBtn');
+                const progressRing = document.querySelector('.progress-ring-circle');
+                
+                if (!scrollBtn) return;
+                
+                function updateProgressRing() {
+                    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrolled = (window.scrollY / windowHeight) * 100;
+                    const progress = 100 - scrolled;
+                    if (progressRing) {
+                        progressRing.style.strokeDashoffset = progress;
+                    }
+                }
+                
+                function toggleScrollButton() {
+                    if (window.scrollY > 300) {
+                        scrollBtn.classList.add('visible');
+                    } else {
+                        scrollBtn.classList.remove('visible');
+                    }
+                    updateProgressRing();
+                }
+                
+                function scrollToTop() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                
+                window.addEventListener('scroll', toggleScrollButton);
+                scrollBtn.addEventListener('click', scrollToTop);
+                toggleScrollButton();
+            }
+
+            // ========== ACTIVE NAVIGATION HIGHLIGHT ==========
+            function setActiveNav() {
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
                 const navLinks = document.querySelectorAll('#navMenu a');
                 
                 navLinks.forEach(link => {
-                    if (link.getAttribute('href') === currentPage) {
+                    const linkPath = link.getAttribute('href').split('/').pop();
+                    if (linkPath === currentPage) {
                         link.classList.add('active');
                     }
                 });
+            }
 
-                // Animate stats on scroll
-                function animateStats() {
-                    const stats = document.querySelectorAll('.story-stat h4');
-                    stats.forEach(stat => {
-                        const finalValue = parseInt(stat.textContent);
-                        if (!isNaN(finalValue)) {
-                            let currentValue = 0;
-                            const increment = finalValue / 50;
-                            const timer = setInterval(() => {
-                                currentValue += increment;
-                                if (currentValue >= finalValue) {
-                                    stat.textContent = finalValue + (stat.textContent.includes('%') ? '%' : '');
-                                    clearInterval(timer);
-                                } else {
-                                    stat.textContent = Math.floor(currentValue);
-                                }
-                            }, 30);
+            // ========== STATS ANIMATION ==========
+            function animateStats() {
+                const stats = document.querySelectorAll('.story-stat h4');
+                stats.forEach(stat => {
+                    const finalValue = parseInt(stat.textContent.replace(/[^0-9]/g, ''));
+                    if (!isNaN(finalValue)) {
+                        let currentValue = 0;
+                        const increment = finalValue / 50;
+                        const timer = setInterval(() => {
+                            currentValue += increment;
+                            if (currentValue >= finalValue) {
+                                stat.textContent = finalValue + (stat.textContent.includes('%') ? '%' : '+');
+                                clearInterval(timer);
+                            } else {
+                                stat.textContent = Math.floor(currentValue);
+                            }
+                        }, 30);
+                    }
+                });
+            }
+
+            // ========== SMOOTH SCROLLING FOR ANCHOR LINKS ==========
+            function initSmoothScroll() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (href !== '#' && href.startsWith('#')) {
+                            e.preventDefault();
+                            const target = document.querySelector(href);
+                            if (target) {
+                                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
                         }
                     });
-                }
+                });
+            }
 
-                // Trigger animation when stats come into view
+            // ========== INTERSECTION OBSERVER FOR STATS ==========
+            function initStatsObserver() {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -78,117 +158,25 @@
                 if (statsSection) {
                     observer.observe(statsSection);
                 }
-
-                // Add smooth scrolling for anchor links
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function(e) {
-                        const href = this.getAttribute('href');
-                        if (href !== '#' && href.startsWith('#')) {
-                            e.preventDefault();
-                            const target = document.querySelector(href);
-                            if (target) {
-                                target.scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'start'
-                                });
-                            }
-                        }
-                    });
-                });
-            });
-
-            // Add header scroll effect
-            let lastScroll = 0;
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset;
-                const header = document.querySelector('header');
-                
-                if (currentScroll > 100) {
-                    if (currentScroll > lastScroll && !navMenu.classList.contains('active')) {
-                        // Scrolling down
-                        header.style.transform = 'translateY(-100%)';
-                    } else {
-                        // Scrolling up
-                        header.style.transform = 'translateY(0)';
-                        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-                    }
-                } else {
-                    header.style.transform = 'translateY(0)';
-                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-                }
-                
-                lastScroll = currentScroll;
-            });
-
-            // Resize listener to handle menu on window resize
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    navMenu.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    document.body.style.overflow = '';
-                }
-            });
-
-            // Premium Scroll-to-Top Button
-            function initScrollToTop() {
-                const scrollBtn = document.getElementById('scrollToTopBtn');
-                const progressRing = document.querySelector('.progress-ring-circle');
-                
-                if (!scrollBtn) return;
-                
-                // Update progress ring based on scroll
-                function updateProgressRing() {
-                    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-                    const scrolled = (window.scrollY / windowHeight) * 100;
-                    const progress = 100 - scrolled;
-                    if (progressRing) {
-                        progressRing.style.strokeDashoffset = progress;
-                    }
-                }
-                
-                // Toggle button visibility
-                function toggleScrollButton() {
-                    if (window.scrollY > 300) {
-                        scrollBtn.classList.add('visible');
-                    } else {
-                        scrollBtn.classList.remove('visible');
-                    }
-                    updateProgressRing();
-                }
-                
-                // Scroll to top function
-                function scrollToTop() {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                }
-                
-                // Event Listeners
-                window.addEventListener('scroll', toggleScrollButton);
-                scrollBtn.addEventListener('click', scrollToTop);
-                
-                // Initialize on load
-                toggleScrollButton();
             }
 
-            // Initialize when DOM is loaded
+            // ========== HOTLINK PROTECTION ==========
+            function hotlinkProtection() {
+                if (document.referrer && 
+                    !document.referrer.includes('localreach.in') && 
+                    !document.referrer.includes('localhost') &&
+                    document.referrer !== '') {
+                    console.log('Hotlinking detected from:', document.referrer);
+                }
+            }
+
+            // ========== INITIALIZE ALL ==========
             document.addEventListener('DOMContentLoaded', function() {
                 initScrollToTop();
+                setActiveNav();
+                initStatsObserver();
+                initSmoothScroll();
+                hotlinkProtection();
                 
-                // Also add it to window load for good measure
                 window.addEventListener('load', initScrollToTop);
             });
-
-            // Basic hotlink protection
-            if (document.referrer && 
-                !document.referrer.includes('localreach.in') && 
-                !document.referrer.includes('localhost') &&
-                document.referrer !== '') {
-                
-                // Optional: Redirect hotlinkers to your homepage
-                // window.location.href = 'https://localreach.in';
-                
-                // Or show a warning
-                console.log('Hotlinking detected from:', document.referrer);
-            }

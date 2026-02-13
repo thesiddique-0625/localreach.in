@@ -1,4 +1,4 @@
-// Mobile Menu Toggle
+// ========== MOBILE MENU TOGGLE ==========
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const navMenu = document.getElementById('navMenu');
             
@@ -8,7 +8,6 @@
                     ? '<i class="fas fa-times"></i>' 
                     : '<i class="fas fa-bars"></i>';
                     
-                // Toggle body scroll when menu is open
                 document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
             });
 
@@ -32,62 +31,7 @@
                 }
             });
 
-            // Set active navigation based on current page
-            document.addEventListener('DOMContentLoaded', function() {
-                const currentPage = window.location.pathname.split('/').pop();
-                const navLinks = document.querySelectorAll('#navMenu a');
-                
-                navLinks.forEach(link => {
-                    if (link.getAttribute('href') === currentPage) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-            // FAQ Toggle Functionality
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', () => {
-                    const answer = question.nextElementSibling;
-                    const isActive = question.classList.contains('active');
-                    
-                    // Toggle current FAQ item
-                    if (isActive) {
-                        question.classList.remove('active');
-                        answer.classList.remove('active');
-                    } else {
-                        // Close all other FAQ items
-                        faqQuestions.forEach(q => {
-                            q.classList.remove('active');
-                            q.nextElementSibling.classList.remove('active');
-                        });
-                        
-                        // Open current FAQ item
-                        question.classList.add('active');
-                        answer.classList.add('active');
-                    }
-                });
-            });
-
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href !== '#' && href.startsWith('#')) {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
-                    }
-                });
-            });
-
-            // Add header scroll effect
+            // ========== HEADER SCROLL EFFECT ==========
             let lastScroll = 0;
             window.addEventListener('scroll', () => {
                 const currentScroll = window.pageYOffset;
@@ -95,10 +39,8 @@
                 
                 if (currentScroll > 100) {
                     if (currentScroll > lastScroll && !navMenu.classList.contains('active')) {
-                        // Scrolling down
                         header.style.transform = 'translateY(-100%)';
                     } else {
-                        // Scrolling up
                         header.style.transform = 'translateY(0)';
                         header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
                     }
@@ -110,7 +52,7 @@
                 lastScroll = currentScroll;
             });
 
-            // Resize listener to handle menu on window resize
+            // ========== RESIZE LISTENER ==========
             window.addEventListener('resize', () => {
                 if (window.innerWidth > 768) {
                     navMenu.classList.remove('active');
@@ -119,14 +61,13 @@
                 }
             });
 
-            // Premium Scroll-to-Top Button
+            // ========== SCROLL-TO-TOP BUTTON ==========
             function initScrollToTop() {
                 const scrollBtn = document.getElementById('scrollToTopBtn');
                 const progressRing = document.querySelector('.progress-ring-circle');
                 
                 if (!scrollBtn) return;
                 
-                // Update progress ring based on scroll
                 function updateProgressRing() {
                     const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
                     const scrolled = (window.scrollY / windowHeight) * 100;
@@ -136,7 +77,6 @@
                     }
                 }
                 
-                // Toggle button visibility
                 function toggleScrollButton() {
                     if (window.scrollY > 300) {
                         scrollBtn.classList.add('visible');
@@ -146,39 +86,82 @@
                     updateProgressRing();
                 }
                 
-                // Scroll to top function
                 function scrollToTop() {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
                 
-                // Event Listeners
                 window.addEventListener('scroll', toggleScrollButton);
                 scrollBtn.addEventListener('click', scrollToTop);
-                
-                // Initialize on load
                 toggleScrollButton();
             }
 
-            // Initialize when DOM is loaded
+            // ========== ACTIVE NAVIGATION HIGHLIGHT ==========
+            function setActiveNav() {
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                const navLinks = document.querySelectorAll('#navMenu a');
+                
+                navLinks.forEach(link => {
+                    const linkPath = link.getAttribute('href').split('/').pop();
+                    if (linkPath === currentPage) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // ========== FAQ TOGGLE ==========
+            function initFaq() {
+                const faqQuestions = document.querySelectorAll('.faq-question');
+                faqQuestions.forEach(question => {
+                    question.addEventListener('click', () => {
+                        const answer = question.nextElementSibling;
+                        const isActive = question.classList.contains('active');
+                        
+                        faqQuestions.forEach(q => {
+                            q.classList.remove('active');
+                            q.nextElementSibling.classList.remove('active');
+                        });
+                        
+                        if (!isActive) {
+                            question.classList.add('active');
+                            answer.classList.add('active');
+                        }
+                    });
+                });
+            }
+
+            // ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
+            function initSmoothScroll() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (href !== '#' && href.startsWith('#')) {
+                            e.preventDefault();
+                            const target = document.querySelector(href);
+                            if (target) {
+                                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }
+                    });
+                });
+            }
+
+            // ========== HOTLINK PROTECTION ==========
+            function hotlinkProtection() {
+                if (document.referrer && 
+                    !document.referrer.includes('localreach.in') && 
+                    !document.referrer.includes('localhost') &&
+                    document.referrer !== '') {
+                    console.log('Hotlinking detected from:', document.referrer);
+                }
+            }
+
+            // ========== INITIALIZE ALL ==========
             document.addEventListener('DOMContentLoaded', function() {
                 initScrollToTop();
+                setActiveNav();
+                initFaq();
+                initSmoothScroll();
+                hotlinkProtection();
                 
-                // Also add it to window load for good measure
                 window.addEventListener('load', initScrollToTop);
             });
-
-            // Basic hotlink protection
-            if (document.referrer && 
-                !document.referrer.includes('localreach.in') && 
-                !document.referrer.includes('localhost') &&
-                document.referrer !== '') {
-                
-                // Optional: Redirect hotlinkers to your homepage
-                // window.location.href = 'https://localreach.in';
-                
-                // Or show a warning
-                console.log('Hotlinking detected from:', document.referrer);
-            }
