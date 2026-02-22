@@ -1135,3 +1135,16 @@
                     font-size: 1.3rem;
                 }
             }
+            .custom-cursor {
+            width: 16px;
+            height: 16px;
+            background-color: #4CAF50;
+            opacity: 0.5;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            will-change: transform;
+            }

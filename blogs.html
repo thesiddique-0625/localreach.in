@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LocalReach - Blog | Digital Marketing Insights for Small Businesses</title>
+        
+        <!-- Standard Favicon -->
+        <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+        
+        <!-- Modern Browsers (PNG format) -->
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+        
+        <!-- Apple Devices -->
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+        
+        <!-- Android Devices -->
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-chrome-192x192.png">
+        <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon/android-chrome-512x512.png">
+        
+        <!-- Windows 8/10 Tiles -->
+        <meta name="msapplication-TileImage" content="assets/favicon/mstile-150x150.png">
+        <meta name="msapplication-TileColor" content="#4CAF50">
+        <meta name="theme-color" content="#4CAF50">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="assets/preloader/preloader.css">
+        <style>
+            /* Base Styles & CSS Variables - MATCHING EXISTING DESIGN */
+            :root {
+                --primary: #4CAF50;
+                --primary-dark: #388E3C;
+                --primary-light: #81C784;
+                --secondary: #212121;
+                --accent: #FF9800;
+                --light: #FFFFFF;
+                --gray-light: #F5F5F5;
+                --gray: #9E9E9E;
+                --gray-dark: #616161;
+                --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+                --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.12);
+                --transition: all 0.3s ease;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                line-height: 1.6;
+                color: var(--secondary);
+                background-color: var(--light);
+                overflow-x: hidden;
+            }
+
+            h1, h2, h3, h4 {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            ul {
+                list-style: none;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 8px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                text-align: center;
+                margin-bottom: 50px;
+                position: relative;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+                color: var(--secondary);
+                display: inline-block;
+            }
+
+            .section-title h2 span {
+                color: var(--primary);
+            }
+
+            .section-title::after {
+                content: '';
+                position: absolute;
+                width: 70px;
+                height: 4px;
+                background-color: var(--primary);
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .section-title p {
+                max-width: 700px;
+                margin: 20px auto 0;
+                color: var(--gray-dark);
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 12px 30px;
+                border-radius: 5px;
+                font-weight: 600;
+                font-size: 1rem;
+                transition: var(--transition);
+                cursor: pointer;
+                border: none;
+                font-family: 'Montserrat', sans-serif;
+                text-align: center;
+            }
+
+            .btn-primary {
+                background-color: var(--primary);
+                color: var(--light);
+            }
+
+            .btn-primary:hover {
+                background-color: var(--primary-dark);
+                transform: translateY(-3px);
+                box-shadow: var(--shadow);
+            }
+
+            .btn-outline {
+                background-color: transparent;
+                color: var(--primary);
+                border: 2px solid var(--primary);
+            }
+
+            .btn-outline:hover {
+                background-color: var(--primary);
+                color: var(--light);
+            }
+
+            /* Header & Navigation */
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: var(--light);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                padding: 15px 0;
+                transition: var(--transition);
+            }
+
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 50px;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                z-index: 1001;
+                gap: 8px;
+            }
+
+            .logo-image-container {
+                height: 50px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 3px;
+            }
+
+            .logo-image {
+                height: 42px;
+                width: auto;
+                object-fit: contain;
+                display: block;
+            }
+
+            .logo-text {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                font-size: 1.8rem;
+                color: var(--secondary);
+                display: flex;
+                align-items: center;
+                height: 50px;
+                padding-bottom: 1px;
+            }
+
+            .logo-text span {
+                color: var(--primary);
+            }
+
+            nav {
+                display: flex;
+                align-items: center;
+                height: 100%;
+            }
+
+            nav ul {
+                display: flex;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+            }
+
+            nav ul li {
+                margin-left: 30px;
+                display: flex;
+                align-items: center;
+            }
+
+            nav ul li a {
+                font-weight: 600;
+                color: var(--secondary);
+                transition: var(--transition);
+                position: relative;
+                padding: 8px 0;
+                display: flex;
+                align-items: center;
+                height: 100%;
+            }
+
+            nav ul li a:hover {
+                color: var(--primary);
+            }
+
+            nav ul li a.active {
+                color: var(--primary);
+            }
+
+            nav ul li a.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: var(--primary);
+            }
+
+            nav ul li a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--primary);
+                transition: var(--transition);
+            }
+
+            nav ul li a:hover::after {
+                width: 100%;
+            }
+
+            .nav-cta {
+                margin-left: 30px;
+            }
+
+            .mobile-menu-btn {
+                display: none;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--secondary);
+                cursor: pointer;
+                padding: 5px;
+                z-index: 1001;
+            }
+
+            /* Page Header */
+            .page-header {
+                padding: 150px 0 80px;
+                background: linear-gradient(rgba(76, 175, 80, 0.9), rgba(76, 175, 80, 0.9)), url('/assets/services/services-breadcrumb.avif');
+                background-size: cover;
+                background-position: center;
+                color: var(--light);
+                text-align: center;
+            }
+
+            .page-header h1 {
+                font-size: 3.5rem;
+                margin-bottom: 20px;
+            }
+
+            .page-header p {
+                font-size: 1.2rem;
+                max-width: 700px;
+                margin: 0 auto 30px;
+                opacity: 0.9;
+            }
+
+            .breadcrumb {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                font-size: 1.1rem;
+            }
+
+            .breadcrumb a {
+                opacity: 0.9;
+                transition: var(--transition);
+            }
+
+            .breadcrumb a:hover {
+                opacity: 1;
+                text-decoration: underline;
+            }
+
+            .breadcrumb i {
+                font-size: 0.8rem;
+            }
+
+            /* Blog Grid */
+            .blog-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 40px;
+                margin: 60px 0;
+            }
+
+            .blog-card {
+                background-color: var(--light);
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: var(--shadow);
+                transition: var(--transition);
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            .blog-card:hover {
+                transform: translateY(-10px);
+                box-shadow: var(--shadow-hover);
+            }
+
+            .blog-image {
+                height: 220px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .blog-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+
+            .blog-card:hover .blog-image img {
+                transform: scale(1.05);
+            }
+
+            .blog-category {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                background-color: var(--primary);
+                color: var(--light);
+                padding: 5px 12px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                z-index: 2;
+            }
+
+            .blog-content {
+                padding: 25px;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .blog-meta {
+                display: flex;
+                gap: 15px;
+                margin-bottom: 15px;
+                font-size: 0.9rem;
+                color: var(--gray);
+            }
+
+            .blog-meta i {
+                color: var(--primary);
+                margin-right: 5px;
+            }
+
+            .blog-title {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+                line-height: 1.4;
+                color: var(--secondary);
+            }
+
+            .blog-title a {
+                transition: var(--transition);
+            }
+
+            .blog-title a:hover {
+                color: var(--primary);
+            }
+
+            .blog-excerpt {
+                color: var(--gray-dark);
+                margin-bottom: 20px;
+                line-height: 1.7;
+                flex-grow: 1;
+            }
+
+            .blog-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: auto;
+                padding-top: 20px;
+                border-top: 1px solid var(--gray-light);
+            }
+
+            .blog-author {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.9rem;
+                color: var(--gray-dark);
+            }
+
+            .blog-author img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .blog-read-more {
+                color: var(--primary);
+                font-weight: 600;
+                transition: var(--transition);
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .blog-read-more:hover {
+                color: var(--primary-dark);
+                gap: 8px;
+            }
+
+            /* Featured Post */
+            .featured-post {
+                background-color: var(--gray-light);
+                border-radius: 15px;
+                overflow: hidden;
+                margin-bottom: 50px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                box-shadow: var(--shadow-hover);
+            }
+
+            .featured-image {
+                height: 100%;
+                min-height: 350px;
+            }
+
+            .featured-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .featured-content {
+                padding: 50px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .featured-label {
+                background-color: var(--accent);
+                color: var(--light);
+                display: inline-block;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                margin-bottom: 20px;
+                width: fit-content;
+            }
+
+            .featured-content h2 {
+                font-size: 2.2rem;
+                margin-bottom: 20px;
+                color: var(--secondary);
+            }
+
+            .featured-content p {
+                color: var(--gray-dark);
+                margin-bottom: 25px;
+                line-height: 1.8;
+            }
+
+            /* Pagination */
+            .pagination {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin: 60px 0 40px;
+            }
+
+            .pagination a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 45px;
+                height: 45px;
+                border-radius: 8px;
+                background-color: var(--gray-light);
+                color: var(--gray-dark);
+                font-weight: 600;
+                transition: var(--transition);
+            }
+
+            .pagination a:hover,
+            .pagination a.active {
+                background-color: var(--primary);
+                color: var(--light);
+            }
+
+            .pagination .next-prev {
+                width: auto;
+                padding: 0 20px;
+            }
+
+            /* Footer */
+            footer {
+                background-color: var(--secondary);
+                color: var(--light);
+                padding: 70px 0 20px;
+            }
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 40px;
+                margin-bottom: 40px;
+            }
+
+            .footer-logo {
+                margin-bottom: 20px;
+            }
+
+            .footer-logo .logo-text {
+                color: var(--light);
+            }
+
+            .footer-about p {
+                margin-bottom: 20px;
+                opacity: 0.8;
+            }
+
+            .social-links {
+                display: flex;
+                gap: 15px;
+            }
+
+            .social-links a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                transition: var(--transition);
+            }
+
+            .social-links a:hover {
+                background-color: var(--primary);
+                transform: translateY(-5px);
+            }
+
+            .footer-heading {
+                font-size: 1.3rem;
+                margin-bottom: 25px;
+                position: relative;
+                padding-bottom: 10px;
+            }
+
+            .footer-heading::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 40px;
+                height: 2px;
+                background-color: var(--primary);
+            }
+
+            .footer-links ul li {
+                margin-bottom: 12px;
+            }
+
+            .footer-links ul li a {
+                opacity: 0.8;
+                transition: var(--transition);
+            }
+
+            .footer-links ul li a:hover {
+                opacity: 1;
+                color: var(--primary);
+                padding-left: 5px;
+            }
+
+            .footer-contact p {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 15px;
+                opacity: 0.8;
+            }
+
+            .footer-contact i {
+                margin-right: 10px;
+                color: var(--primary);
+                margin-top: 5px;
+            }
+
+            .copyright {
+                text-align: center;
+                padding-top: 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                opacity: 0.7;
+                font-size: 0.9rem;
+            }
+
+            /* Custom Cursor */
+            .custom-cursor {
+                width: 32px;
+                height: 32px;
+                background-color: #4CAF50;
+                opacity: 0.5;
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+                transition: width 0.2s, height 0.2s, background-color 0.2s;
+                will-change: transform;
+            }
+
+            /* Responsive Styles */
+            @media (max-width: 1200px) {
+                .container {
+                    padding: 0 40px;
+                }
+            }
+
+            @media (max-width: 992px) {
+                .featured-post {
+                    grid-template-columns: 1fr;
+                }
+                
+                .featured-image {
+                    min-height: 300px;
+                }
+                
+                .blog-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 768px) {
+                /* ✅ PERFECT HAMBURGER */
+                .mobile-menu-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 52px;
+                    height: 52px;
+                    margin-left: auto;
+                    padding: 0;
+                    background: none;
+                    border: none;
+                    font-size: 2rem;
+                    color: var(--secondary);
+                    cursor: pointer;
+                    z-index: 1001;
+                    touch-action: manipulation;
+                    position: relative;
+                }
+
+                .mobile-menu-btn::after {
+                    content: '';
+                    position: absolute;
+                    top: -15px;
+                    left: -15px;
+                    right: -15px;
+                    bottom: -15px;
+                    background: transparent;
+                }
+
+                .mobile-menu-btn i {
+                    line-height: 1;
+                }
+
+                nav ul {
+                    position: fixed;
+                    top: 80px;
+                    left: 0;
+                    width: 100%;
+                    background-color: var(--light);
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 20px 0;
+                    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                    transform: translateY(-150%);
+                    transition: var(--transition);
+                    z-index: 999;
+                }
+
+                nav ul.active {
+                    transform: translateY(0);
+                }
+
+                nav ul li {
+                    margin: 15px 0;
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                nav ul li a {
+                    padding: 10px 0;
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .nav-cta {
+                    margin-left: 0;
+                    margin-top: 10px;
+                }
+
+                .page-header h1 {
+                    font-size: 2.8rem;
+                }
+
+                .section-title h2 {
+                    font-size: 2rem;
+                }
+
+                .blog-grid {
+                    grid-template-columns: 1fr;
+                }
+                
+                /* Mobile logo adjustments */
+                .logo-image {
+                    height: 38px;
+                }
+                
+                .logo-text {
+                    font-size: 1.6rem;
+                }
+                
+                .logo {
+                    gap: 6px;
+                }
+                
+                .logo-image-container {
+                    margin-bottom: 2px;
+                }
+
+                /* Hide progress ring on mobile */
+                .scroll-to-top .progress-ring {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .container {
+                    padding: 0 20px;
+                }
+                
+                .page-header h1 {
+                    font-size: 2.2rem;
+                }
+                
+                .page-header p {
+                    font-size: 1rem;
+                }
+                
+                .featured-content {
+                    padding: 30px;
+                }
+                
+                .featured-content h2 {
+                    font-size: 1.8rem;
+                }
+                
+                /* Small mobile logo adjustments */
+                .logo-image {
+                    height: 33px;
+                }
+                
+                .logo-text {
+                    font-size: 1.4rem;
+                }
+                
+                .logo {
+                    gap: 5px;
+                }
+                
+                .logo-image-container {
+                    margin-bottom: 1px;
+                }
+            }
+
+            /* Premium Scroll-to-Top Button - Clean version */
+            .scroll-to-top {
+                position: fixed;
+                bottom: 40px;
+                right: 40px;
+                width: 60px;
+                height: 60px;
+                background: var(--primary);
+                color: var(--light);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.8rem;
+                cursor: pointer;
+                transition: var(--transition);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px);
+                z-index: 999;
+                box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+                border: 2px solid var(--light);
+            }
+
+            .scroll-to-top.visible {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .scroll-to-top:hover {
+                background: var(--primary-dark);
+                transform: translateY(-5px);
+                box-shadow: 0 12px 30px rgba(76, 175, 80, 0.4);
+            }
+
+            .scroll-to-top:active {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+            }
+
+            .scroll-to-top .progress-ring {
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                right: -2px;
+                bottom: -2px;
+                border-radius: 50%;
+                z-index: -1;
+            }
+
+            .scroll-to-top .progress-ring-circle {
+                fill: none;
+                stroke: var(--primary-light);
+                stroke-width: 2;
+                stroke-dasharray: 100;
+                stroke-dashoffset: 100;
+                transition: stroke-dashoffset 0.3s ease;
+                transform: rotate(-90deg);
+                transform-origin: 50% 50%;
+            }
+
+            .scroll-to-top .pulse-effect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--primary);
+                border-radius: 50%;
+                opacity: 0;
+                z-index: -1;
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0% { transform: scale(1); opacity: 0.8; }
+                100% { transform: scale(1.3); opacity: 0; }
+            }
+
+            @media (max-width: 768px) {
+                .scroll-to-top {
+                    width: 50px;
+                    height: 50px;
+                    bottom: 25px;
+                    right: 25px;
+                    font-size: 1.5rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .scroll-to-top {
+                    width: 45px;
+                    height: 45px;
+                    bottom: 20px;
+                    right: 20px;
+                    font-size: 1.3rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Preloader -->
+        <div id="preloader">
+            <div id="box">
+                <div id="l1" class="local-letter">L</div>
+                <div id="l2" class="local-letter">o</div>
+                <div id="l3" class="local-letter">c</div>
+                <div id="l4" class="local-letter">a</div>
+                <div id="l5" class="local-letter">l</div>
+                <div id="l6" class="reach-letter">R</div>
+                <div id="l7" class="reach-letter">e</div>
+                <div id="l8" class="reach-letter">a</div>
+                <div id="l9" class="reach-letter">c</div>
+                <div id="l10" class="reach-letter">h</div>
+            </div>
+        </div>
+        
+        <!-- Header & Navigation -->
+        <header>
+            <div class="container header-container">
+                <a href="https://www.localreach.in" class="logo">
+                    <div class="logo-image-container">
+                        <img src="assets/header.png" alt="LocalReach Logo" class="logo-image" loading="lazy">
+                    </div>
+                    <div class="logo-text">Local<span>Reach</span></div>
+                </a>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav>
+                    <ul id="navMenu">
+                        <li><a href="https://www.localreach.in">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li class="nav-cta"><a href="contact.html" class="btn btn-primary">Get Started</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Our Blog</h1>
+                <p>Insights, tips, and stories to help your local business thrive in the digital world.</p>
+                <div class="breadcrumb">
+                    <a href="https://www.localreach.in">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Blog</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Blog Section -->
+        <section class="section">
+            <div class="container">
+                
+                <!-- Featured Post -->
+                <div class="featured-post">
+                    <div class="featured-image">
+                        <img src="assets/blog/featured.jpg" alt="Featured Blog Post" loading="lazy">
+                    </div>
+                    <div class="featured-content">
+                        <span class="featured-label">Featured</span>
+                        <h2>5 Local SEO Strategies That Actually Work in 2025</h2>
+                        <p>Discover proven, budget‑friendly SEO tactics that help small businesses rank higher in local searches and attract more walk‑in customers. No fluff, just actionable advice from our founder who's been in your shoes.</p>
+                        <a href="#" class="btn btn-primary">Read Article →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Grid -->
+                <div class="blog-grid">
+                    <!-- Blog Post 1 -->
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="assets/blog/post1.jpg" alt="Blog Post 1" loading="lazy">
+                            <span class="blog-category">SEO</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> Mar 15, 2025</span>
+                                <span><i class="far fa-user"></i> Aman Afroz</span>
+                            </div>
+                            <h3 class="blog-title"><a href="#">Google My Business: The Complete Guide for Local Shops</a></h3>
+                            <p class="blog-excerpt">Learn how to set up, verify, and optimise your GMB profile to appear in the local 3‑pack and get more calls.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <img src="assets/index/FOUNDER%20IMAGE.png" alt="Aman Afroz">
+                                    <span>Aman</span>
+                                </div>
+                                <a href="#" class="blog-read-more">Read <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 2 -->
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="assets/blog/post2.jpg" alt="Blog Post 2" loading="lazy">
+                            <span class="blog-category">Social Media</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> Mar 2, 2025</span>
+                                <span><i class="far fa-user"></i> Shezil Ansari</span>
+                            </div>
+                            <h3 class="blog-title"><a href="#">Instagram Reels for Small Businesses: Ideas That Work</a></h3>
+                            <p class="blog-excerpt">Simple, low‑cost reel ideas to showcase your products, build trust, and connect with local customers on Instagram.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <img src="assets/index/Shezil%20Ansari.jpeg" alt="Shezil Ansari">
+                                    <span>Shezil</span>
+                                </div>
+                                <a href="#" class="blog-read-more">Read <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 3 -->
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="assets/blog/post3.jpg" alt="Blog Post 3" loading="lazy">
+                            <span class="blog-category">WhatsApp</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> Feb 18, 2025</span>
+                                <span><i class="far fa-user"></i> Mohd Hamza</span>
+                            </div>
+                            <h3 class="blog-title"><a href="#">Automate Your WhatsApp: Save Time & Never Miss a Customer</a></h3>
+                            <p class="blog-excerpt">How to set up automated greetings, quick replies, and order updates using WhatsApp Business tools.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <img src="assets/index/Mohd%20Hamza.png" alt="Mohd Hamza">
+                                    <span>Hamza</span>
+                                </div>
+                                <a href="#" class="blog-read-more">Read <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 4 -->
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="assets/blog/post4.jpg" alt="Blog Post 4" loading="lazy">
+                            <span class="blog-category">Paid Ads</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> Feb 5, 2025</span>
+                                <span><i class="far fa-user"></i> Aman Afroz</span>
+                            </div>
+                            <h3 class="blog-title"><a href="#">Facebook Ads on a Shoestring Budget: A Local Business Guide</a></h3>
+                            <p class="blog-excerpt">Practical tips to run effective Facebook ad campaigns without wasting money – ideal for small budgets.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <img src="assets/index/FOUNDER%20IMAGE.png" alt="Aman Afroz">
+                                    <span>Aman</span>
+                                </div>
+                                <a href="#" class="blog-read-more">Read <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 5 -->
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="assets/blog/post5.jpg" alt="Blog Post 5" loading="lazy">
+                            <span class="blog-category">Web Dev</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> Jan 22, 2025</span>
+                                <span><i class="far fa-user"></i> Mohd Hamza</span>
+                            </div>
+                            <h3 class="blog-title"><a href="#">Why Your Small Business Needs a Mobile‑First Website</a></h3>
+                            <p class="blog-excerpt">Most local searches happen on phones. Find out why a responsive, fast‑loading website is non‑negotiable.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <img src="assets/index/Mohd%20Hamza.png" alt="Mohd Hamza">
+                                    <span>Hamza</span>
+                                </div>
+                                <a href="#" class="blog-read-more">Read <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 6 -->
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="assets/blog/post6.jpg" alt="Blog Post 6" loading="lazy">
+                            <span class="blog-category">Content</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> Jan 10, 2025</span>
+                                <span><i class="far fa-user"></i> Shezil Ansari</span>
+                            </div>
+                            <h3 class="blog-title"><a href="#">Content Ideas for the Whole Year: A Calendar for Local Businesses</a></h3>
+                            <p class="blog-excerpt">Never run out of post ideas. Download our free content calendar tailored for shops, salons, and service providers.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <img src="assets/index/Shezil%20Ansari.jpeg" alt="Shezil Ansari">
+                                    <span>Shezil</span>
+                                </div>
+                                <a href="#" class="blog-read-more">Read <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#" class="next-prev">Next <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <div class="logo-text"><a href="https://www.localreach.in">Local<span>Reach</span></a></div>
+                        </div>
+                        <p>We specialize in helping small businesses, shops and firms establish a powerful online presence to reach local consumers effectively. Our strategies focus on visibility, trust and measurable growth within your community.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="http://www.instagram.com/localreach.india"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@LocalReach-India"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.linkedin.com/company/localreach-digital-growth-partner/"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <h3 class="footer-heading">Quick Links</h3>
+                        <ul>
+                            <li><a href="https://www.localreach.in">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h3 class="footer-heading">Our Services</h3>
+                        <ul>
+                            <li><a href="services.html#sales">Sales Strategy</a></li>
+                            <li><a href="services.html#seo">Local SEO & GMB</a></li>
+                            <li><a href="services.html#social">Social Media Management</a></li>
+                            <li><a href="services.html#content">Content Creation</a></li>
+                            <li><a href="services.html#ads">Google & Meta Ads</a></li>
+                            <li><a href="services.html#whatsapp">WhatsApp Automation</a></li>
+                            <li><a href="services.html#web">Web Development</a></li>
+                            <li><a href="services.html#website-seo">Website SEO</a></li>
+                            <li><a href="services.html#app">App Development</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact">
+                        <h3 class="footer-heading">Contact Us</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Civil Lines, Bareilly, U.P. 243001</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+917217400133">+91 7217400133</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:localreach.in@gmail.com">localreach.in@gmail.com</a></p>
+                        <p><i class="fas fa-clock"></i> Mon-Sat: 9am-6pm</p>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 <a href="https://www.localreach.in" style="color: var(--primary);">LocalReach</a>. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Custom Cursor Element -->
+        <div class="custom-cursor"></div>
+
+        <!-- Scroll-to-top button -->
+        <button class="scroll-to-top" id="scrollToTopBtn" aria-label="Scroll to top">
+            <i class="fas fa-chevron-up"></i>
+            <div class="pulse-effect"></div>
+            <svg class="progress-ring" width="60" height="60">
+                <circle class="progress-ring-circle" stroke-width="2" r="28" cx="30" cy="30"></circle>
+            </svg>
+        </button> 
+        
+        <!-- JavaScript - Clean, consolidated -->
+        <script src="assets/preloader/preloader.js"></script>
+        <script>
+            // ========== MOBILE MENU TOGGLE ==========
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+                    
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            document.querySelectorAll('#navMenu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = '';
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+
+            // ========== HEADER SCROLL EFFECT ==========
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                const header = document.querySelector('header');
+                
+                if (currentScroll > 100) {
+                    if (currentScroll > lastScroll && !navMenu.classList.contains('active')) {
+                        header.style.transform = 'translateY(-100%)';
+                    } else {
+                        header.style.transform = 'translateY(0)';
+                        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                    }
+                } else {
+                    header.style.transform = 'translateY(0)';
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                }
+                
+                lastScroll = currentScroll;
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // ========== SCROLL-TO-TOP BUTTON ==========
+            function initScrollToTop() {
+                const scrollBtn = document.getElementById('scrollToTopBtn');
+                const progressRing = document.querySelector('.progress-ring-circle');
+                
+                if (!scrollBtn) return;
+                
+                function updateProgressRing() {
+                    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrolled = (window.scrollY / windowHeight) * 100;
+                    const progress = 100 - scrolled;
+                    if (progressRing) {
+                        progressRing.style.strokeDashoffset = progress;
+                    }
+                }
+                
+                function toggleScrollButton() {
+                    if (window.scrollY > 300) {
+                        scrollBtn.classList.add('visible');
+                    } else {
+                        scrollBtn.classList.remove('visible');
+                    }
+                    updateProgressRing();
+                }
+                
+                function scrollToTop() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                
+                window.addEventListener('scroll', toggleScrollButton);
+                scrollBtn.addEventListener('click', scrollToTop);
+                toggleScrollButton();
+            }
+
+            // ========== CUSTOM CURSOR ==========
+            function initCustomCursor() {
+                const cursor = document.querySelector('.custom-cursor');
+                if (!cursor) return;
+
+                let mouseX = 0, mouseY = 0;
+                let cursorX = 0, cursorY = 0;
+                const speed = 0.1;
+
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                function animateCursor() {
+                    cursorX += (mouseX - cursorX) * speed;
+                    cursorY += (mouseY - cursorY) * speed;
+                    cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+                    requestAnimationFrame(animateCursor);
+                }
+
+                animateCursor();
+
+                document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+                document.addEventListener('mouseenter', () => cursor.style.opacity = '0.5');
+            }
+
+            // ========== ACTIVE NAVIGATION HIGHLIGHT ==========
+            function setActiveNav() {
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                const navLinks = document.querySelectorAll('#navMenu a');
+                
+                navLinks.forEach(link => {
+                    const linkPath = link.getAttribute('href').split('/').pop();
+                    if (linkPath === currentPage) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // ========== HOTLINK PROTECTION ==========
+            function hotlinkProtection() {
+                if (document.referrer && 
+                    !document.referrer.includes('localreach.in') && 
+                    !document.referrer.includes('localhost') &&
+                    document.referrer !== '') {
+                    console.log('Hotlinking detected from:', document.referrer);
+                }
+            }
+
+            // ========== INITIALIZE ALL ==========
+            document.addEventListener('DOMContentLoaded', function() {
+                initScrollToTop();
+                setActiveNav();
+                initCustomCursor();
+                hotlinkProtection();
+                
+                window.addEventListener('load', initScrollToTop);
+            });
+        </script>
+    </body>
+</html>
