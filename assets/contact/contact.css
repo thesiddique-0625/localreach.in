@@ -1191,3 +1191,26 @@
             .whatsapp-number a:hover{
                 text-decoration:underline;
             }
+
+            /* Remove default focus outline from all interactive elements */
+            button:focus,
+            a:focus,
+            .btn:focus,
+            input:focus,
+            textarea:focus,
+            select:focus {
+                outline: none;
+                box-shadow: none;
+            }
+
+            /* Add a subtle, premium focus style for keyboard users (optional but recommended) */
+            button:focus-visible,
+            a:focus-visible,
+            .btn:focus-visible,
+            input:focus-visible,
+            textarea:focus-visible,
+            select:focus-visible {
+                outline: 2px solid var(--primary, #4CAF50);
+                outline-offset: 2px;
+                border-radius: 4px;
+            }
