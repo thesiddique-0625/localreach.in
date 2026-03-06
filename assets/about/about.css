@@ -1127,3 +1127,34 @@
                 outline-offset: 2px;
                 border-radius: 4px;
             }
+
+            /* Force remove all focus outlines and rings */
+            button:focus,
+            a:focus,
+            .btn:focus,
+            input:focus,
+            textarea:focus,
+            select:focus,
+            [tabindex]:focus,
+            [contenteditable]:focus,
+            [role="button"]:focus,
+            [type="button"]:focus,
+            [type="submit"]:focus,
+            [type="reset"]:focus {
+                outline: none !important;
+                box-shadow: none !important;
+                -webkit-tap-highlight-color: transparent !important; /* Removes mobile tap highlight */
+            }
+
+            /* Optional: keep a visible focus for keyboard users (accessible) */
+            button:focus-visible,
+            a:focus-visible,
+            .btn:focus-visible,
+            input:focus-visible,
+            textarea:focus-visible,
+            select:focus-visible,
+            [tabindex]:focus-visible {
+                outline: 2px solid var(--primary, #4CAF50) !important;
+                outline-offset: 2px !important;
+                box-shadow: none !important;
+            }
